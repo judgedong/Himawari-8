@@ -126,7 +126,7 @@ for x in os.listdir(rootPath):
         if platform.system()=='Windows':
             shutil.move(os.path.join(rootPath, x),os.path.join(oldTemp, x))
         else:#linux系统下就不保存Temp了
-            os.remove(os.path.join(rootPath, x),os.path.join(oldTemp, x))
+            os.remove(os.path.join(rootPath, x))
 
 #谜之多线程
 threads = []
