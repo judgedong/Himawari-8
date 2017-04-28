@@ -141,9 +141,11 @@ for t in threads:
     t.join()
 #谜之多线程
 
-png.save("%swallpaper/%s%02d%02d-%02d%02d00.png" % (rootPath,time.year,time.month,time.day,time.hour,(time.minute // 10) * 10), 'PNG')
 #换完壁纸吱一声
 if platform.system()=='Windows':
+    png.save("%swallpaper/%s%02d%02d-%02d%02d00.png" % (rootPath,time.year,time.month,time.day,time.hour,(time.minute // 10) * 10), 'PNG')
     import winsound
     winsound.PlaySound("*", winsound.SND_ALIAS)
+else:
+    png.save("%swallpaper/%s%02d%02d-%02d%02d00.webp" % (rootPath,time.year,time.month,time.day,time.hour,(time.minute // 10) * 10), 'WEBP')
 print(datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S")+' 获取====>>'+datetime.strftime(time, "%Y-%m-%d %H:%M:%S")+' ========>>Done!!')
