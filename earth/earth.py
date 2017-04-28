@@ -74,7 +74,10 @@ cdn = 'http://res.cloudinary.com/pxbfhhmjiwol5sox5dfpxwgfbfluhcnuczb0u72muxyymnd
 base = 'http://himawari8-dl.nict.go.jp/himawari8/img/D531106/%sd/550' % (scale)
 
 #文件操作的根目录
-rootPath =  'f://earth/'
+if platform.system()=='Windows':
+    rootPath =  'f://earth/'
+else:
+    rootPath =  '/root/earth/'
 wallpaperPath= rootPath+'wallpaper/'
 oldwallpaperPath= rootPath+'wallpaper-old/'
 oldTemp = rootPath+'temp-old/'
@@ -120,8 +123,10 @@ for x in os.listdir(wallpaperPath):
 #移动rootPath下的所有文件到oldTemp
 for x in os.listdir(rootPath):
     if os.path.isfile(os.path.join(rootPath, x)):
-        shutil.move(os.path.join(rootPath, x),os.path.join(oldTemp, x))
-
+        if platform.system()=='Windows':
+            shutil.move(os.path.join(rootPath, x),os.path.join(oldTemp, x))
+        else:#linux系统下就不保存Temp了
+            os.remove(os.path.join(rootPath, x),os.path.join(oldTemp, x))
 
 #谜之多线程
 threads = []
