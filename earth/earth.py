@@ -143,7 +143,12 @@ for t in threads:
 
 #换完壁纸吱一声
 if platform.system()=='Windows':
-    png.save("%swallpaper/%s%02d%02d-%02d%02d00.png" % (rootPath,time.year,time.month,time.day,time.hour,(time.minute // 10) * 10), 'PNG')
+    txt=Image.new('RGBA', png.size, (0,0,0,0))
+    fnt=ImageFont.truetype("c:/Windows/fonts/Tahoma.ttf", 20)
+    d=ImageDraw.Draw(txt)
+    d.text((txt.size[0]-190,txt.size[1]-25), datetime.strftime(time, "%Y-%m-%d %H:%M:%S"),font=fnt, fill=(255,255,255,127))
+    out=Image.alpha_composite(png, txt)
+    out.save("%swallpaper/%s%02d%02d-%02d%02d00.png" % (rootPath,time.year,time.month,time.day,time.hour,(time.minute // 10) * 10), 'PNG')
     import winsound
     winsound.PlaySound("*", winsound.SND_ALIAS)
 else:
